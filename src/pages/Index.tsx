@@ -6,6 +6,9 @@ import { Card, CardHeader, CardTitle } from '@/components/ui/card';
 import { Camera, FileImage } from 'lucide-react';
 import { toast } from 'sonner';
 
+// Replace 'YOUR_DROPBOX_API_KEY_HERE' with your actual Dropbox API key
+const DROPBOX_API_KEY = 'YOUR_DROPBOX_API_KEY_HERE';
+
 const Index = () => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [metadata, setMetadata] = useState<MetadataFormData>({
@@ -40,9 +43,9 @@ const Index = () => {
   };
 
   const handleDropboxSync = async (imageBlob: Blob) => {
-    const accessToken = localStorage.getItem('dropbox_token');
-    if (!accessToken) {
-      toast.error('Please connect to Dropbox first');
+    const accessToken = DROPBOX_API_KEY;
+    if (!accessToken || accessToken === 'YOUR_DROPBOX_API_KEY_HERE') {
+      toast.error('Please replace YOUR_DROPBOX_API_KEY_HERE with your actual Dropbox API key in the code');
       return;
     }
 

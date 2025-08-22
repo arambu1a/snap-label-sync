@@ -93,41 +93,9 @@ export const ImageProcessor = ({ imageFile, metadata, onSyncToDropbox }: ImagePr
 
   const handleSyncToDropbox = async () => {
     if (!processedImageBlob) return;
-
-    const accessToken = localStorage.getItem('dropbox_token');
-    if (!accessToken) {
-      onSyncToDropbox(processedImageBlob);
-      return;
-    }
-
-    try {
-      const filename = `${metadata.pmNumber}_${metadata.name}_${Date.now()}.jpg`;
-      
-      const response = await fetch('https://content.dropboxapi.com/2/files/upload', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${accessToken}`,
-          'Content-Type': 'application/octet-stream',
-          'Dropbox-API-Arg': JSON.stringify({
-            path: `/PhotoAnnotations/${filename}`,
-            mode: 'add',
-            autorename: true
-          })
-        },
-        body: processedImageBlob
-      });
-
-      if (response.ok) {
-        const result = await response.json();
-        onSyncToDropbox(processedImageBlob);
-      } else {
-        const error = await response.json();
-        console.error('Dropbox sync failed:', error.error_summary || 'Unknown error');
-      }
-    } catch (error) {
-      console.error('Dropbox upload error:', error);
-      onSyncToDropbox(processedImageBlob);
-    }
+    
+    // Get API key from the main component
+    onSyncToDropbox(processedImageBlob);
   };
 
   return (
