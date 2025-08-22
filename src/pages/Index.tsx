@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { ImageUpload } from '@/components/ImageUpload';
 import { MetadataForm, MetadataFormData } from '@/components/MetadataForm';
 import { ImageProcessor } from '@/components/ImageProcessor';
-import { DropboxSync } from '@/components/DropboxSync';
 import { Card, CardHeader, CardTitle } from '@/components/ui/card';
 import { Camera, FileImage } from 'lucide-react';
 import { toast } from 'sonner';
@@ -124,7 +123,6 @@ const Index = () => {
               onProcess={handleProcessImage}
             />
 
-            <DropboxSync onSync={handleDropboxSync} />
           </div>
 
           {/* Right Column */}
